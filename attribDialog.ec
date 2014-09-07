@@ -2,15 +2,13 @@ import "ecere"
 
 static FileFilter imgFilters[] =
 {
-   { ".PNG Files", "png" },
-   { ".JPG Files", "jpg" },
+   { "Image Files (*.jpg, *.jpeg, *.bmp, *.pcx, *.png, *.gif)", "jpg, jpeg, bmp, pcx, png, gif" },
    { "All files", null }
 };
 
 static FileType imgTypes[] =
 {
-   { "Image Files", "png", always }
-//   { ".JPG Files", "jpg", always },
+   { "Image Files", "jpg, jpeg, bmp, pcx, png, gif", always }
 };
 
 public enum ElTypes
