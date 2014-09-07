@@ -1,0 +1,69 @@
+{
+   "Version" : 0.2,
+   "ModuleName" : "CardCreator",
+   "Options" : {
+      "Warnings" : "All",
+      "TargetType" : "Executable",
+      "TargetFileName" : "CardCreator",
+      "Libraries" : [
+         "ecere"
+      ]
+   },
+   "Configurations" : [
+      {
+         "Name" : "Debug",
+         "Options" : {
+            "Debug" : true,
+            "Optimization" : "None",
+            "PreprocessorDefinitions" : [
+               "_DEBUG"
+            ],
+            "FastMath" : false
+         }
+      },
+      {
+         "Name" : "Release",
+         "Options" : {
+            "Debug" : false,
+            "Optimization" : "Speed",
+            "FastMath" : true
+         }
+      }
+   ],
+   "Files" : [
+      "MainWin.ec",
+      "Credits.txt",
+      "attribDialog.ec",
+      "aboutDialog.ec"
+   ],
+   "ResourcesPath" : "",
+   "Resources" : [
+      "Data/img/Colorless.png",
+      "Data/img/Card Base colorless.png",
+      "Data/img/basic.png",
+      "Data/img/stage1.png",
+      "Data/img/stage2.png",
+      "Data/img/Card Base darkness.png",
+      "Data/img/Card Base dragon.png",
+      "Data/img/Card Base fairy.png",
+      "Data/img/Card Base fighting.png",
+      "Data/img/Card Base fire.png",
+      "Data/img/Card Base grass.png",
+      "Data/img/Card Base lightning.png",
+      "Data/img/Card Base metal.png",
+      "Data/img/Card Base psychic.png",
+      "Data/img/Card Base water.png",
+      "Data/img/Darkness.png",
+      "Data/img/Dragon.png",
+      "Data/img/fairy.png",
+      "Data/img/Fighting.png",
+      "Data/img/Fire.png",
+      "Data/img/Grass.png",
+      "Data/img/Lightning.png",
+      "Data/img/Metal.png",
+      "Data/img/PokeBody.png",
+      "Data/img/PokePower.png",
+      "Data/img/Psychic.png",
+      "Data/img/Water.png"
+   ]
+}
