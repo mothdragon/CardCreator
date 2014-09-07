@@ -92,9 +92,9 @@ class AttribDialog : Window
 //      }
 //   }
 
-   SavingDataBox dbPkmnEl {
+   DropBox dbPkmnEl {
       this, size = { 120, 24 }, position = { 184, 48 };
-      data = &pkmnType, type = class(ElTypes);
+//      data = &pkmnType, type = class(ElTypes);
    };
    Label lblPkmnName { this, caption = "Name your POKéMON:", position = { 8, 8 } };
    EditBox ebPkmnName { this, caption = "editBox1", size = { 182, 19 }, position = { 120, 8 } };
@@ -112,6 +112,18 @@ class AttribDialog : Window
       dbPkmnEvo.AddString("Basic").tag = 1;
       dbPkmnEvo.AddString("Stage 1").tag = 2;
       dbPkmnEvo.AddString("Stage 2").tag = 3;
+
+      dbPkmnEl.AddString("Colorless").tag = 1;
+      dbPkmnEl.AddString("Darkness").tag = 2;
+      dbPkmnEl.AddString("Dragon").tag = 3;
+      dbPkmnEl.AddString("Fairy").tag = 4;
+      dbPkmnEl.AddString("Fighting").tag = 5;
+      dbPkmnEl.AddString("Fire").tag = 6;
+      dbPkmnEl.AddString("Grass").tag = 7;
+      dbPkmnEl.AddString("Lightning").tag = 8;
+      dbPkmnEl.AddString("Metal").tag = 9;
+      dbPkmnEl.AddString("Psychic").tag = 10;
+      dbPkmnEl.AddString("Water").tag = 11;
 
       // Load the various Retreat Costs
       dbPkmnRetCost.AddString("0").tag = 1;

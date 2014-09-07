@@ -83,21 +83,94 @@ class MainWin : Window
             AddResource(pkmnImage); // Add the Bitmap to our list of resources so it can be used
 //            RemoveResource(cardPkmn.image); // Remove the old bitmap so we're not hogging memory
             cardPkmn.image = pkmnImage; // assign the new image to be displayed on the card.
-//            switch attribDialog.dbPkmnEvo.DataRow
-//            {
-//               case 1:
-//               {
-//                  break;
-//               }
-//               case 2:
-//               {
-//                  break;
-//               }
-//               case 3:
-//               {
-//                  break;
-//               }
-//            }
+
+            // Change the Evolution of the card
+            switch(attribDialog.dbPkmnEvo.currentRow.tag)
+            {
+               case 1:
+               { cardEvo.image = { ":basic.png" }; break; }
+               case 2:
+               { cardEvo.image = { ":stage1.png" }; break; }
+               case 3:
+               { cardEvo.image = { ":stage2.png" }; break; }
+            }
+            // Change the type of the card
+            switch(attribDialog.dbPkmnEl.currentRow.tag)
+            {
+               case 1:
+               {
+                  cardBack.image = { ":Card Base colorless.png" };
+                  cardEl.image = { ":Colorless.png" };
+                  break;
+               }
+               case 2:
+               {
+                  cardBack.image = { ":Card Base darkness.png" };
+                  cardEl.image = { ":Darkness.png" };
+                  break;
+               }
+               case 3:
+               {
+                  cardBack.image = { ":Card Base dragon.png" };
+                  cardEl.image = { ":Dragon.png" };
+                  break;
+               }
+               case 4:
+               {
+                  cardBack.image = { ":Card Base fairy.png" };
+                  cardEl.image = { ":fairy.png" };
+                  break;
+               }
+               case 5:
+               {
+                  cardBack.image = { ":Card Base fighting.png" };
+                  cardEl.image = { ":Fighting.png" };
+                  break;
+               }
+               case 6:
+               {
+                  cardBack.image = { ":Card Base fire.png" };
+                  cardEl.image = { ":Fire.png" };
+                  break;
+               }
+               case 7:
+               {
+                  cardBack.image = { ":Card Base grass.png" };
+                  cardEl.image = { ":Grass.png" };
+                  break;
+               }
+               case 8:
+               {
+                  cardBack.image = { ":Card Base lightning.png" };
+                  cardEl.image = { ":Lightning.png" };
+                  break;
+               }
+               case 9:
+               {
+                  cardBack.image = { ":Card Base metal.png" };
+                  cardEl.image = { ":Metal.png" };
+                  break;
+               }
+               case 10:
+               {
+                  cardBack.image = { ":Card Base psychic.png" };
+                  cardEl.image = { ":Psychic.png" };
+                  break;
+               }
+               case 11:
+               {
+                  cardBack.image = { ":Card Base water.png" };
+                  cardEl.image = { ":Water.png" };
+                  break;
+               }
+
+
+
+
+
+
+            }
+
          }
       }
    };
