@@ -1,6 +1,17 @@
 # Binaries
 obj/
 
+# Anything that's not source
+*.Makefile
+*.ews
+*.o
+*.sym
+*.c
+*.imp
+*.exe
+*.lst
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
