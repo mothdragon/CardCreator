@@ -1,3 +1,6 @@
+# Ecere SDK config files
+.config/
+
 # Binaries
 obj/
 

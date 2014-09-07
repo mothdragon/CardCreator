@@ -32,7 +32,6 @@
    ],
    "Files" : [
       "MainWin.ec",
-      "Credits.txt",
       "attribDialog.ec",
       "aboutDialog.ec"
    ],
