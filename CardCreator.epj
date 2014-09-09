@@ -33,7 +33,8 @@
    "Files" : [
       "MainWin.ec",
       "attribDialog.ec",
-      "aboutDialog.ec"
+      "aboutDialog.ec",
+      "a1Dialog.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [
