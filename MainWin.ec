@@ -23,7 +23,6 @@ class MainWin : Window
    clientSize = { 450, 616 };
 
    BitmapResource pkmnImage { window = this };
-
    Menu fileMenu { menu, "File", f };
    MenuItem openItem
    {
@@ -60,8 +59,6 @@ class MainWin : Window
       master = this, type = open, text = "Load File...",
       types = pkcTypes, sizeTypes = sizeof(pkcTypes), filters = pkcFilters, sizeFilters = sizeof(pkcFilters)
    };
-   saveDialog = fileSaveDialog;
-
    Menu editMenu { menu, "Edit", e };
    MenuItem PokeItem
    {
@@ -395,6 +392,8 @@ class MainWin : Window
          if(a1Dialog.Modal() == ok)
          {
             lblA1Name.caption = a1Dialog.ebA1Name.contents;
+            lblA1Dmg.caption = a1Dialog.ebA1Dmg.contents;
+            ebA1Desc.contents = a1Dialog.ebA1Desc.contents;
             switch(a1Dialog.dbA1Cost1.currentRow.tag)
             {
                case 1:
@@ -555,6 +554,133 @@ class MainWin : Window
                   break;
                }
             }
+            switch(a1Dialog.dbA1Cost3.currentRow.tag)
+            {
+               case 1:
+               {
+                  a1Cost3.image = null;
+                  a1Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a1Cost3.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a1Cost3.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a1Cost3.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a1Cost3.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a1Cost3.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a1Cost3.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a1Cost3.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a1Cost3.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a1Cost3.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a1Cost3.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a1Cost3.image = { ":Water.png" };
+                  break;
+               }
+            }
+            switch(a1Dialog.dbA1Cost4.currentRow.tag)
+            {
+               case 1:
+               {
+                  a1Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a1Cost4.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a1Cost4.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a1Cost4.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a1Cost4.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a1Cost4.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a1Cost4.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a1Cost4.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a1Cost4.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a1Cost4.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a1Cost4.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a1Cost4.image = { ":Water.png" };
+                  break;
+               }
+            }
          }
          return true;
       }
@@ -563,11 +689,9 @@ class MainWin : Window
    {
       editMenu, "Edit POKéMON's Second Attack...", 2, ctrl2;
    };
-
    AttribDialog attribDialog {};
    AboutDialog aboutDialog {};
    A1Dialog a1Dialog {};
-
    Menu helpMenu { menu, "Help", h };
    MenuItem AboutItem
    {
@@ -578,34 +702,29 @@ class MainWin : Window
          return true;
       }
    };
-
-
    Picture cardBack { this, position = { 32, 32 }, size = { 387, 557 }, image = { ":Card Base colorless.png" }};
    Picture cardEvo { this, position = { 16, 16 }, image = { ":basic.png" }};
    Picture cardEl { this, position = { 380, 38 }, size = { 30, 30 }, image = { ":Colorless.png" }};
    Picture cardPkmn { this, position = { 53, 77 }, size = { 347, 230} };
-
    Picture cardWeak { this, position = { 52, 529 }, size = { 19, 19 }, image = null };
    Label cardWeakAmt { this, caption = "", font = { "Arial", 12.0f, bold = true }, position = { 73, 530 } };
-
    Picture cardRes { this, position = { 128, 529 }, size = { 19, 19 }, image = null };
    Label cardResAmt { this, caption = "", font = { "Arial", 12.0f, bold = true }, position = { 149, 530 } };
-
    Picture cardRetCost1 { this, position = { 90, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost2 { this, position = { 115, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost3 { this, position = { 140, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost4 { this, position = { 165, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
-
-   Label lblPkmnName { this, caption = "Purple Monkey", font = { "Tahoma", 15.0f, bold = true }, position = { 120, 40 } };
+   Label lblPkmnName { this, caption = "Purple Monkey", font = { "Arial", 15.0f, bold = true }, position = { 118, 40 } };
    Label lblPkmnHP { this, caption = "HP", font = { "Tahoma", 10.0f, bold = true }, position = { 325, 53 } };
-   Label lblPkmnHPAmt { this, caption = "30", font = { "Tahoma", 15.0f, bold = true }, position = { 343, 47} };
-
-   Label lblA1Name { this, caption = "Slap", font = { "Tahoma", 16.0f, bold = true }, position = { 156, 337 } };
+   Label lblPkmnHPAmt { this, caption = "30", font = { "Arial", 15.0f, bold = true }, position = { 343, 47} };
+   Label lblA1Name { this, caption = "Slap", font = { "Arial", 17.0f, bold = true }, position = { 156, 337 } };
    Picture a1Cost1 { this, position = { 36, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost2 { this, position = { 64, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost3 { this, position = { 92, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost4 { this, position = { 120, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
-
+   Label lblA1Dmg { this, caption = "10+", font = { "Arial", 17.0f, bold = true }, position = { 365, 337 } };
+   EditBox ebA1Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 11 }, size = { 369, 67 }, position = { 36, 365 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon." };
+//   Label lblA1Desc{ this, font = { "Arial", 11 }, position = { 36, 365 }, scrollArea = { 1576, 19 }, multiLine = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon." };
    Label lblIllus { this, caption = "Illus. Charlie Griffin", font = { "Arial", 7.0f, italic = true  }, position = { 265, 570 }};
 }
 
