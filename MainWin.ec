@@ -2,6 +2,7 @@ import "ecere"
 import "attribDialog"
 import "aboutDialog"
 import "a1Dialog"
+import "a2Dialog"
 
 static FileFilter pkcFilters[] =
 {
@@ -688,10 +689,279 @@ class MainWin : Window
    MenuItem Attack2Item
    {
       editMenu, "Edit POKéMON's Second Attack...", 2, ctrl2;
+      bool NotifySelect(MenuItem selection, Modifiers mods)
+      {
+         if(a2Dialog.Modal() == ok)
+         {
+            lblA2Name.caption = a2Dialog.ebA2Name.contents;
+            lblA2Dmg.caption = a2Dialog.ebA2Dmg.contents;
+            ebA2Desc.contents = a2Dialog.ebA2Desc.contents;
+            switch(a2Dialog.dbA2Cost1.currentRow.tag)
+            {
+               case 1:
+               {
+                  a2Cost1.image = null;
+                  a2Cost2.image = null;
+                  a2Cost3.image = null;
+                  a2Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a2Cost1.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a2Cost1.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a2Cost1.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a2Cost1.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a2Cost1.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a2Cost1.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a2Cost1.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a2Cost1.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a2Cost1.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a2Cost1.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a2Cost1.image = { ":Water.png" };
+                  break;
+               }
+            }
+            switch(a2Dialog.dbA2Cost2.currentRow.tag)
+            {
+               case 1:
+               {
+                  a2Cost2.image = null;
+                  a2Cost3.image = null;
+                  a2Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a2Cost2.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a2Cost2.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a2Cost2.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a2Cost2.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a2Cost2.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a2Cost2.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a2Cost2.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a2Cost2.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a2Cost2.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a2Cost2.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a2Cost2.image = { ":Water.png" };
+                  break;
+               }
+            }
+            switch(a2Dialog.dbA2Cost3.currentRow.tag)
+            {
+               case 1:
+               {
+                  a2Cost3.image = null;
+                  a2Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a2Cost3.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a2Cost3.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a2Cost3.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a2Cost3.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a2Cost3.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a2Cost3.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a2Cost3.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a2Cost3.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a2Cost3.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a2Cost3.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a2Cost3.image = { ":Water.png" };
+                  break;
+               }
+            }
+            switch(a2Dialog.dbA2Cost4.currentRow.tag)
+            {
+               case 1:
+               {
+                  a2Cost4.image = null;
+                  break;
+               }
+               case 2:
+               {
+                  a2Cost4.image = { ":Colorless.png" };
+                  break;
+               }
+               case 3:
+               {
+                  a2Cost4.image = { ":Darkness.png" };
+                  break;
+               }
+               case 4:
+               {
+                  a2Cost4.image = { ":Dragon.png" };
+                  break;
+               }
+               case 5:
+               {
+                  a2Cost4.image = { ":fairy.png" };
+                  break;
+               }
+               case 6:
+               {
+                  a2Cost4.image = { ":Fighting.png" };
+                  break;
+               }
+               case 7:
+               {
+                  a2Cost4.image = { ":Fire.png" };
+                  break;
+               }
+               case 8:
+               {
+                  a2Cost4.image = { ":Grass.png" };
+                  break;
+               }
+               case 9:
+               {
+                  a2Cost4.image = { ":Lightning.png" };
+                  break;
+               }
+               case 10:
+               {
+                  a2Cost4.image = { ":Metal.png" };
+                  break;
+               }
+               case 11:
+               {
+                  a2Cost4.image = { ":Psychic.png" };
+                  break;
+               }
+               case 12:
+               {
+                  a2Cost4.image = { ":Water.png" };
+                  break;
+               }
+            }
+         }
+         return true;
+      }
    };
    AttribDialog attribDialog {};
    AboutDialog aboutDialog {};
    A1Dialog a1Dialog {};
+   A2Dialog a2Dialog {};
    Menu helpMenu { menu, "Help", h };
    MenuItem AboutItem
    {
@@ -703,9 +973,9 @@ class MainWin : Window
       }
    };
    Picture cardBack { this, position = { 32, 32 }, size = { 387, 557 }, image = { ":Card Base colorless.png" }};
+   Picture cardPkmn { this, position = { 53, 77 }, size = { 347, 230} };
    Picture cardEvo { this, position = { 16, 16 }, image = { ":basic.png" }};
    Picture cardEl { this, position = { 380, 38 }, size = { 30, 30 }, image = { ":Colorless.png" }};
-   Picture cardPkmn { this, position = { 53, 77 }, size = { 347, 230} };
    Picture cardWeak { this, position = { 52, 529 }, size = { 19, 19 }, image = null };
    Label cardWeakAmt { this, caption = "", font = { "Arial", 12.0f, bold = true }, position = { 73, 530 } };
    Picture cardRes { this, position = { 128, 529 }, size = { 19, 19 }, image = null };
@@ -723,8 +993,16 @@ class MainWin : Window
    Picture a1Cost3 { this, position = { 92, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost4 { this, position = { 120, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Label lblA1Dmg { this, caption = "10+", font = { "Arial", 17.0f, bold = true }, position = { 365, 337 } };
-   EditBox ebA1Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 11 }, size = { 369, 67 }, position = { 36, 365 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon." };
+   EditBox ebA1Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 365 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
 //   Label lblA1Desc{ this, font = { "Arial", 11 }, position = { 36, 365 }, scrollArea = { 1576, 19 }, multiLine = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon." };
+   Label lblA2Name { this, caption = "Slap", font = { "Arial", 17.0f, bold = true }, position = { 156, 425 } };
+   Picture a2Cost1 { this, position = { 36, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
+   Picture a2Cost2 { this, position = { 64, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
+   Picture a2Cost3 { this, position = { 92, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
+   Picture a2Cost4 { this, position = { 120, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
+   Label lblA2Dmg { this, caption = "10+", font = { "Arial", 17.0f, bold = true }, position = { 365, 425 } };
+   EditBox ebA2Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 453 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
+
    Label lblIllus { this, caption = "Illus. Charlie Griffin", font = { "Arial", 7.0f, italic = true  }, position = { 265, 570 }};
 }
 

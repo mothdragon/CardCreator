@@ -14,18 +14,18 @@ static FileType imgTypes[] =
 
 class AttribDialog : Window
 {
-   autoCreate = false;
    caption = "Edit POKéMON Attributes";
    background = formColor;
    borderStyle = sizable;
    hasClose = true;
-   size = { 504, 288 };
-   anchor = { horz = -79, vert = -59 };
-
+   size = { 504, 312 };
+   anchor = { horz = -79, vert = -47 };
+   autoCreate = false;
    Label lblPkmnImage { this, caption = "Choose the image for your POKéMON:", position = { 8, 184 } };
-   EditBox ebPkmnImage { this, caption = "editBox1", size = { 238, 19 }, position = { 192, 184 } };
-   Button btnPkmnImageBrowse {
-      this, caption = "...", size = { 26, 21 }, position = { 432, 184 };
+   EditBox ebPkmnImage { this, caption = "editBox1", size = { 262, 19 }, position = { 192, 184 } };
+   Button btnPkmnImageBrowse
+   {
+      this, caption = "...", size = { 26, 21 }, position = { 456, 184 };
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          imgPickDialog.Modal();
@@ -37,46 +37,54 @@ class AttribDialog : Window
 
       }
    };
-
    Label lblPkmnComments { this, caption = "Comments:", position = { 8, 80 } };
    EditBox ebPkmnComments { this, caption = "editBox1", size = { 294, 59 }, position = { 8, 96 } };
-
    Label lblPkmnIllus { this, caption = "Illustrator:", position = { 8, 160 } };
    EditBox ebPkmnIllus { this, caption = "editBox1", size = { 238, 19 }, position = { 64, 160 } };
-
    Label lblPkmnRetCost { this, caption = "Retreat Cost:", position = { 328, 112 } };
    DropBox dbPkmnRetCost { this, size = { 56, 24 }, position = { 328, 128 } };
-
    Label lblPkmnRes { this, caption = "Resistance:", position = { 328, 72 } };
    DropBox dbPkmnResEl { this, size = { 88, 24 }, position = { 328, 88 } };
    DropBox dbPkmnResAmt { this, size = { 56, 24 }, position = { 424, 88 } };
-
    Label lblPkmnWeak { this, caption = "Weakness:", position = { 328, 32 } };
    DropBox dbPkmnWeakEl { this, size = { 88, 24 }, position = { 328, 48 } };
    DropBox dbPkmnWeakAmt { this, caption = "dropBox1", size = { 56, 24 }, position = { 424, 48 } };
-
    Label lblPkmnEl { this, caption = "Choose an element type:", position = { 184, 32 } };
    DropBox dbPkmnEl { this, size = { 120, 24 }, position = { 184, 48 } };
-
    Label lblPkmnEvo { this, caption = "Choose the stage of evolution:", position = { 8, 32 } };
    DropBox dbPkmnEvo { this, size = { 152, 24 }, position = { 8, 48 } };
-
    Label lblPkmnName { this, caption = "Name your POKéMON:", position = { 8, 8 } };
    EditBox ebPkmnName { this, caption = "editBox1", size = { 182, 19 }, position = { 120, 8 } };
-
    Label lblPkmnHP { this, caption = "POKéMONs HP:", position = { 320, 8 } };
    EditBox ebPkmnHP { this, caption = "editBox1", position = { 400, 8 } };;
+   Label lblPkmnEvImg { this, caption = $"Choose the image your POKeMON evolves from:", size = { 236, 13 }, position = { 8, 208 } };
+   EditBox ebPkmnEvImg { this, caption = $"editBox1", size = { 206, 19 }, position = { 248, 208 } };
+   Button btnPkmnEvImgBrowse
+   {
+      this, caption = $"...", size = { 26, 21 }, position = { 456, 208 };
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+      {
+         imgPickDialog.Modal();
+         if(imgPickDialog.Modal() == ok) // open the file dialog box, and wait for confirmation that all is okay.
+         {
+            ebPkmnEvImg.contents = imgPickDialog.filePath; // display the selected directory in the edit box
+         }
+         return true;
 
-   Button btnOK {
-      this, caption = "OK", size = { 98, 29 }, position = { 136, 216 };
+      }
+   };
+
+
+   Button btnOK
+   {
+      this, caption = "OK", size = { 98, 29 }, position = { 136, 240 };
       bool NotifyClicked(Button button, int x, int y, Modifiers mods) { Destroy(DialogResult::ok); return true; }
    };
-
-   Button btnCancel {
-      this, caption = "Cancel", size = { 100, 29 }, position = { 248, 216 };
+   Button btnCancel
+   {
+      this, caption = "Cancel", size = { 100, 29 }, position = { 248, 240 };
       bool NotifyClicked(Button button, int x, int y, Modifiers mods) { Destroy(0); return false; }
    };
-
    FileDialog imgPickDialog
    {
       master = this, type = open, text = "Select the image for your POKéMON",
