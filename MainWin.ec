@@ -4,6 +4,8 @@ import "aboutDialog"
 import "a1Dialog"
 import "a2Dialog"
 
+#define MAX_NAME_SIZE 24
+
 static FileFilter pkcFilters[] =
 {
    { "POKéMON Card Creator Files (*.pkc)", "pkc" },
@@ -22,8 +24,11 @@ class MainWin : Window
    hasClose = true;
    hasMenuBar = true;
    clientSize = { 450, 616 };
+   isDocument = true;
 
    BitmapResource pkmnImage { window = this };
+   BitmapResource pkmnEvFrmImage { window = this };
+
    Menu fileMenu { menu, "File", f };
    MenuItem openItem
    {
@@ -33,13 +38,7 @@ class MainWin : Window
       {
          if(openDialog.Modal() == ok)
          {
-            File f = FileOpen(openDialog.filePath, read);
-            if(f)
-            {
-               fileName = openDialog.filePath;
-               //editBox.Load(f);  //editBox = the content to load...
-               delete(f);
-            }
+            OnLoadFile(openDialog.filePath);
          }
          return true;
       }
@@ -55,6 +54,95 @@ class MainWin : Window
       master = this, type = save, text = "Save File...",
       types = pkcTypes, sizeTypes = sizeof(pkcTypes), filters = pkcFilters, sizeFilters = sizeof(pkcFilters)
    };
+
+   bool OnSaveFile(const char * fileName)
+   {
+      File f = FileOpen(fileName, write);
+      if(f)
+      {
+         f.Put(cardBack.fileName);
+         f.Put(cardPkmn);
+         f.Put(cardPkmnEvFrm);
+         f.Put(cardEvo);
+         f.Put(cardEl);
+         f.Put(cardWeak);
+         f.Put(cardWeakAmt);
+         f.Put(cardRes);
+         f.Put(cardResAmt);
+         f.Put(cardRetCost1);
+         f.Put(cardRetCost2);
+         f.Put(cardRetCost3);
+         f.Put(cardRetCost4);
+         f.Write(lblPkmnName.caption, 1, MAX_NAME_SIZE);
+         f.Put(lblPkmnHP.caption);
+         f.Put(lblPkmnHPAmt.caption);
+         f.Put(lblA1Name.caption);
+         f.Put(a1Cost1);
+         f.Put(a1Cost2);
+         f.Put(a1Cost3);
+         f.Put(a1Cost4);
+         f.Put(lblA1Dmg.caption);
+         f.Put(ebA1Desc.contents);
+         f.Put(lblA2Name.caption);
+         f.Put(a2Cost1);
+         f.Put(a2Cost2);
+         f.Put(a2Cost3);
+         f.Put(a2Cost4);
+         f.Put(lblA2Dmg.caption);
+         f.Put(ebA2Desc.contents);
+         f.Put(lblIllus.caption);
+         modifiedDocument = false;
+      }
+      delete f;
+      return true;
+   }
+   bool OnLoadFile(const char * fileName)
+   {
+      char TempName[MAX_NAME_SIZE];
+      File f = FileOpen(fileName, read);
+//      MessageBox(0, "Hello World!");
+      if(f)
+      {
+         f.Get(cardBack);
+//         MessageBox(0, cardBack
+         f.Get(cardPkmn);
+         f.Get(cardPkmnEvFrm);
+         f.Get(cardEvo);
+         f.Get(cardEl);
+         f.Get(cardWeak);
+         f.Get(cardWeakAmt);
+         f.Get(cardRes);
+         f.Get(cardResAmt);
+         f.Get(cardRetCost1);
+         f.Get(cardRetCost2);
+         f.Get(cardRetCost3);
+         f.Get(cardRetCost4);
+//         f.Read(lblPkmnName);
+         f.Read(TempName, 1, sizeof(TempName));
+         lblPkmnName.caption = TempName;
+         f.Get(lblPkmnHP);
+         f.Get(lblPkmnHPAmt);
+         f.Get(lblA1Name);
+         f.Get(a1Cost1);
+         f.Get(a1Cost2);
+         f.Get(a1Cost3);
+         f.Get(a1Cost4);
+         f.Get(lblA1Dmg);
+         f.Get(ebA1Desc);
+         f.Get(lblA2Name);
+         f.Get(a2Cost1);
+         f.Get(a2Cost2);
+         f.Get(a2Cost3);
+         f.Get(a2Cost4);
+         f.Get(lblA2Dmg);
+         f.Get(ebA2Desc);
+         f.Get(lblIllus);
+         modifiedDocument = false;
+         Update(null);
+      }
+      delete f;
+      return true;
+   }
    FileDialog openDialog
    {
       master = this, type = open, text = "Load File...",
@@ -80,6 +168,14 @@ class MainWin : Window
 //            RemoveResource(cardPkmn.image); // Remove the old bitmap so we're not hogging memory
             cardPkmn.image = pkmnImage; // assign the new image to be displayed on the card.
 
+            pkmnEvFrmImage.fileName = attribDialog.ebPkmnEvImg.contents; // get the image filename from the dialog box
+//Note: something about the following commented lines causes the program to stay in memory
+// so we can't even compile a new one...
+//            delete cardPkmn.image; // erase the old image so there's no memory conflicts
+            AddResource(pkmnEvFrmImage); // Add the Bitmap to our list of resources so it can be used
+//            RemoveResource(cardPkmn.image); // Remove the old bitmap so we're not hogging memory
+            cardPkmnEvFrm.image = pkmnEvFrmImage; // assign the new image to be displayed on the card.
+
             // Change the Evolution of the card
             switch(attribDialog.dbPkmnEvo.currentRow.tag)
             {
@@ -97,66 +193,77 @@ class MainWin : Window
                {
                   cardBack.image = { ":Card Base colorless.png" };
                   cardEl.image = { ":Colorless.png" };
+                  fColor = black;
                   break;
                }
                case 2:
                {
                   cardBack.image = { ":Card Base darkness.png" };
                   cardEl.image = { ":Darkness.png" };
+                  fColor = white;
                   break;
                }
                case 3:
                {
                   cardBack.image = { ":Card Base dragon.png" };
                   cardEl.image = { ":Dragon.png" };
+                  fColor = black;
                   break;
                }
                case 4:
                {
                   cardBack.image = { ":Card Base fairy.png" };
                   cardEl.image = { ":fairy.png" };
+                  fColor = black;
                   break;
                }
                case 5:
                {
                   cardBack.image = { ":Card Base fighting.png" };
                   cardEl.image = { ":Fighting.png" };
+                  fColor = black;
                   break;
                }
                case 6:
                {
                   cardBack.image = { ":Card Base fire.png" };
                   cardEl.image = { ":Fire.png" };
+                  fColor = black;
                   break;
                }
                case 7:
                {
                   cardBack.image = { ":Card Base grass.png" };
                   cardEl.image = { ":Grass.png" };
+                  fColor = black;
                   break;
                }
                case 8:
                {
                   cardBack.image = { ":Card Base lightning.png" };
                   cardEl.image = { ":Lightning.png" };
+                  fColor = black;
                   break;
                }
                case 9:
                {
                   cardBack.image = { ":Card Base metal.png" };
                   cardEl.image = { ":Metal.png" };
+                  fColor = black;
                   break;
                }
                case 10:
                {
                   cardBack.image = { ":Card Base psychic.png" };
                   cardEl.image = { ":Psychic.png" };
+                  fColor = black;
                   break;
                }
                case 11:
                {
                   cardBack.image = { ":Card Base water.png" };
                   cardEl.image = { ":Water.png" };
+                  fColor = black;
                   break;
                }
             }
@@ -972,38 +1079,42 @@ class MainWin : Window
          return true;
       }
    };
+// Why doesn't fColor change with Darkness type?
+   Color fColor { 0x000000 };
    Picture cardBack { this, position = { 32, 32 }, size = { 387, 557 }, image = { ":Card Base colorless.png" }};
    Picture cardPkmn { this, position = { 53, 77 }, size = { 347, 230} };
+
+   Picture cardPkmnEvFrm {this, position = { 30, 50 }, size = { 100, 70 } };
+
    Picture cardEvo { this, position = { 16, 16 }, image = { ":basic.png" }};
    Picture cardEl { this, position = { 380, 38 }, size = { 30, 30 }, image = { ":Colorless.png" }};
    Picture cardWeak { this, position = { 52, 529 }, size = { 19, 19 }, image = null };
-   Label cardWeakAmt { this, caption = "", font = { "Arial", 12.0f, bold = true }, position = { 73, 530 } };
+   Label cardWeakAmt { this, caption = "", foreground = fColor, font = { "Arial", 12.0f, bold = true }, position = { 73, 530 } };
    Picture cardRes { this, position = { 128, 529 }, size = { 19, 19 }, image = null };
-   Label cardResAmt { this, caption = "", font = { "Arial", 12.0f, bold = true }, position = { 149, 530 } };
+   Label cardResAmt { this, caption = "", foreground = fColor, font = { "Arial", 12.0f, bold = true }, position = { 149, 530 } };
    Picture cardRetCost1 { this, position = { 90, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost2 { this, position = { 115, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost3 { this, position = { 140, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
    Picture cardRetCost4 { this, position = { 165, 560 }, size = { 19, 19 }, image = {":Colorless.png"} };
-   Label lblPkmnName { this, caption = "Purple Monkey", font = { "Arial", 15.0f, bold = true }, position = { 118, 40 } };
-   Label lblPkmnHP { this, caption = "HP", font = { "Tahoma", 10.0f, bold = true }, position = { 325, 53 } };
-   Label lblPkmnHPAmt { this, caption = "30", font = { "Arial", 15.0f, bold = true }, position = { 343, 47} };
-   Label lblA1Name { this, caption = "Slap", font = { "Arial", 17.0f, bold = true }, position = { 156, 337 } };
+   Label lblPkmnName { this, caption = "Purple Monkey", foreground = fColor, font = { "Arial", 15.0f, bold = true }, position = { 118, 40 } };
+   Label lblPkmnHP { this, caption = "HP", foreground = fColor, font = { "Tahoma", 10.0f, bold = true }, position = { 325, 53 } };
+   Label lblPkmnHPAmt { this, caption = "30", foreground = fColor, font = { "Arial", 15.0f, bold = true }, position = { 343, 47} };
+   Label lblA1Name { this, caption = "Slap", foreground = fColor, font = { "Arial", 17.0f, bold = true }, position = { 156, 337 } };
    Picture a1Cost1 { this, position = { 36, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost2 { this, position = { 64, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost3 { this, position = { 92, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a1Cost4 { this, position = { 120, 336 }, size = { 30, 30 }, image = {":Colorless.png"} };
-   Label lblA1Dmg { this, caption = "10+", font = { "Arial", 17.0f, bold = true }, position = { 365, 337 } };
-   EditBox ebA1Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 365 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
-//   Label lblA1Desc{ this, font = { "Arial", 11 }, position = { 36, 365 }, scrollArea = { 1576, 19 }, multiLine = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon." };
-   Label lblA2Name { this, caption = "Slap", font = { "Arial", 17.0f, bold = true }, position = { 156, 425 } };
+   Label lblA1Dmg { this, caption = "10+", foreground = fColor, font = { "Arial", 17.0f, bold = true }, position = { 365, 337 } };
+   EditBox ebA1Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, foreground = fColor, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 365 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each of your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
+   Label lblA2Name { this, caption = "Slap", foreground = fColor, font = { "Arial", 17.0f, bold = true }, position = { 156, 425 } };
    Picture a2Cost1 { this, position = { 36, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a2Cost2 { this, position = { 64, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a2Cost3 { this, position = { 92, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
    Picture a2Cost4 { this, position = { 120, 424 }, size = { 30, 30 }, image = {":Colorless.png"} };
-   Label lblA2Dmg { this, caption = "10+", font = { "Arial", 17.0f, bold = true }, position = { 365, 425 } };
-   EditBox ebA2Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 453 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each or your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
+   Label lblA2Dmg { this, caption = "10+", foreground = fColor, font = { "Arial", 17.0f, bold = true }, position = { 365, 425 } };
+   EditBox ebA2Desc{ this, background = formColor, 0, borderStyle = none, inactive = true, foreground = fColor, font = { "Arial", 10 }, size = { 369, 67 }, position = { 36, 453 }, scrollArea = { 1576, 67 }, readOnly = true, true, noCaret = true, noSelect = true, wrap = true, contents = "Slap does 10 damage to your opponents Defending Pokemon, as well as 10 damage to each of your opponents benched Pokemon. If your opponent has no benched pokemon, this attack does 20 damage to the opponents Defending Pokemon. Need to make this even longer for testing ;)" };
 
-   Label lblIllus { this, caption = "Illus. Charlie Griffin", font = { "Arial", 7.0f, italic = true  }, position = { 265, 570 }};
+   Label lblIllus { this, caption = "Illus. Charlie Griffin", foreground = fColor, font = { "Arial", 7.0f, italic = true  }, position = { 265, 570 }};
 }
 
 MainWin mainWin {};
